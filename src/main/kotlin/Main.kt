@@ -32,7 +32,7 @@ suspend fun main() {
     }
     println(response.body())
     val config = json.decodeFromString<LiteClientConfigGlobal>(response.body()).apply {
-        println(this)
+        println(this) // UQB8bMeCUMAcarjTznJujsUz4xSWoyPbduD0jyxSc4071UGC
     }
     val mnemo: List<String> = (File("mnemo.txt").toString()).split(" ")
     val pk = PrivateKeyEd25519(toSeed(mnemo))

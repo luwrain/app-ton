@@ -9,6 +9,7 @@ import org.ton.api.pk.PrivateKeyEd25519
 import org.ton.block.AddrStd
 import org.ton.block.Coins
 import org.ton.cell.buildCell
+import org.ton.contract.wallet.MessageData
 import org.ton.contract.wallet.WalletTransfer
 import org.ton.contract.wallet.WalletV3R2Contract
 import org.ton.lite.client.LiteClient
@@ -25,20 +26,23 @@ suspend fun main() {
     val json = Json { ignoreUnknownKeys = true }
     val client = HttpClient.newBuilder().build()
     val request = HttpRequest.newBuilder()
-        .uri(URI.create("https://ton.org/testnet-global.config.json"))
+        .uri(URI.create("https://ton.org/testnet-global.config.json")) // https://ton.org/global-config.json
         .build()
     val response = withContext(Dispatchers.IO) {
         client.send(request, HttpResponse.BodyHandlers.ofString())
     }
-    println(response.body())
 
+    //println(response.body())
     val config = json.decodeFromString<LiteClientConfigGlobal>(response.body()).apply {
         println(this)
     }
-    val mnemo: List<String> = (File("mnemo.txt").toString()).split(" ")
-    val pk = PrivateKeyEd25519(toSeed(mnemo))
+
+    val mnemo: List<String> = (File("mnemo.txt").toString()).split(", ")
+    val pk = PrivateKeyEd25519(toSeed(mnemo, readln()))
     val context: CoroutineContext = Dispatchers.Default
     try {
+//        val mnemonic = Mnemonic.generate(password = readln())
+//        println(mnemonic)
         val liteClient = LiteClient(context, config)
         val walletAddress = WalletV3R2Contract.address(pk, 0)
         println(
@@ -46,13 +50,13 @@ suspend fun main() {
                 userFriendly = true,
                 bounceable = false
             )
-        ) // EQB8bMeCUMAcarjTznJujsUz4xSWoyPbduD0jyxSc4071UGC
+        ) // UQCFQbtdp14pw7XKfKw67MtXXr4ZRssxqILlkTXXodfNvBrv
         val wallet = WalletV3R2Contract(liteClient, walletAddress)
 
         wallet.transfer(pk, WalletTransfer {
-            destination = AddrStd("EQA0uozH7lZDe1eJQTZHChL8hFSw5mjy50HnV0ejoWlS89aQ")
+            destination = AddrStd("EQAhEbOl7UHo8kpGhEcpL3mSy3LURh5HTZhcx3iZmd3hfSpb")
             coins = Coins(2000000000) // = 2 TON
-            messageData = org.ton.contract.wallet.MessageData.raw(
+            messageData = MessageData.raw(
                 body = buildCell {// empty body
 //                storeUInt(0, 32)
 //                storeBytes("Comment".toByteArray())

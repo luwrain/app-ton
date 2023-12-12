@@ -33,14 +33,14 @@ suspend fun main() {
     println(response.body())
 
     val config = json.decodeFromString<LiteClientConfigGlobal>(response.body()).apply {
-        println(this) // UQB8bMeCUMAcarjTznJujsUz4xSWoyPbduD0jyxSc4071UGC
+        println(this)
     }
     val mnemo: List<String> = (File("mnemo.txt").toString()).split(" ")
     val pk = PrivateKeyEd25519(toSeed(mnemo))
     val context: CoroutineContext = Dispatchers.Default
     val liteClient = LiteClient(context, config)
     val walletAddress = WalletV3R2Contract.address(pk, 0)
-    println(walletAddress.toString(userFriendly = true, bounceable = false))
+    println(walletAddress.toString(userFriendly = true, bounceable = false)) // UQB8bMeCUMAcarjTznJujsUz4xSWoyPbduD0jyxSc4071UGC
     val wallet = WalletV3R2Contract(liteClient, walletAddress)
 
     wallet.transfer(pk, WalletTransfer{

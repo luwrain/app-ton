@@ -31,6 +31,7 @@ suspend fun main() {
         client.send(request, HttpResponse.BodyHandlers.ofString())
     }
     println(response.body())
+
     val config = json.decodeFromString<LiteClientConfigGlobal>(response.body()).apply {
         println(this) // UQB8bMeCUMAcarjTznJujsUz4xSWoyPbduD0jyxSc4071UGC
     }

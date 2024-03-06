@@ -118,7 +118,7 @@ class MainTest {
                 }
             )
             sendMode = 1 // pay separate
-        })
+        }) // WalletAddress == kQCFQbtdp14pw7XKfKw67MtXXr4ZRssxqILlkTXXodfNvPyg
         Thread.sleep(10_000)
         val actual = wallet.getWalletData().seqno
         val expected = 31

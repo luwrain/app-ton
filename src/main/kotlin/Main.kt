@@ -53,7 +53,7 @@ suspend fun main() {
                 bounceable = true,
                 testOnly = true
             )
-        ) // UQCFQbtdp14pw7XKfKw67MtXXr4ZRssxqILlkTXXodfNvBrv
+        ) // WalletAddress == kQCFQbtdp14pw7XKfKw67MtXXr4ZRssxqILlkTXXodfNvPyg
         val wallet = WalletV3R2Contract(liteClient, walletAddress)
 
         wallet.transfer(pk, WalletTransfer {

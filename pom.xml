@@ -62,12 +62,6 @@
       <artifactId>curve25519-kotlin-jvm</artifactId>
       <version>0.0.4</version>
     </dependency>
-    <!--        <dependency>-->
-    <!--            <groupId>org.ton</groupId>-->
-    <!--            <artifactId>ton-kotlin-liteclient-jvm</artifactId>-->
-    <!--            <version>0.2.18</version>-->
-    <!--            <scope>test</scope>-->
-    <!--        </dependency>-->
   </dependencies>
   <build>
     <sourceDirectory>src/main/kotlin</sourceDirectory>
@@ -76,11 +70,6 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.3</version>
-        <!--                <configuration>-->
-        <!--                    <includes>-->
-        <!--                        <include>test.kt</include>-->
-        <!--                    </includes>-->
-        <!--                </configuration>-->
       </plugin>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>

@@ -6,20 +6,26 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.ton.api.liteclient.config.LiteClientConfigGlobal
 import org.ton.api.pk.PrivateKeyEd25519
+import org.ton.api.pub.PublicKeyUnencrypted
 import org.ton.block.AddrStd
 import org.ton.block.Coins
+import org.ton.block.StateInit
+import org.ton.cell.CellBuilder
 import org.ton.cell.buildCell
 import org.ton.contract.wallet.MessageData
 import org.ton.contract.wallet.WalletTransfer
 import org.ton.contract.wallet.WalletV3R2Contract
 import org.ton.lite.client.LiteClient
 import org.ton.mnemonic.Mnemonic.toSeed
+import org.ton.tl.ByteString.Companion.toByteString
 import java.io.File
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import kotlin.coroutines.CoroutineContext
+import org.ton.tlb.storeTlb
+import org.ton.block.Message
 
 
 suspend fun main() {
@@ -39,6 +45,8 @@ suspend fun main() {
 
     val mnemo: List<String> = (File("mnemo.txt").toString()).split(", ")
     val pk = PrivateKeyEd25519(toSeed(mnemo, readln()))
+    println(pk.publicKey().key)
+
     val context: CoroutineContext = Dispatchers.Default
     try {
 //        val mnemonic = Mnemonic.generate(password = readln())
@@ -48,18 +56,19 @@ suspend fun main() {
         println(
             walletAddress.toString(
                 userFriendly = true,
-                bounceable = false
+                bounceable = true,
+                testOnly = true
             )
         ) // UQCFQbtdp14pw7XKfKw67MtXXr4ZRssxqILlkTXXodfNvBrv
         val wallet = WalletV3R2Contract(liteClient, walletAddress)
 
         wallet.transfer(pk, WalletTransfer {
-            destination = AddrStd("EQAhEbOl7UHo8kpGhEcpL3mSy3LURh5HTZhcx3iZmd3hfSpb")
+            destination = AddrStd("EQAarqdYDQxX5qsduNjHLdg7M96Dfh6VTAaCWSIz3UrMxbf-")
             coins = Coins(2000000000) // = 2 TON
             messageData = MessageData.raw(
                 body = buildCell {// empty body
-//                storeUInt(0, 32)
-//                storeBytes("Comment".toByteArray())
+//                    storeUInt(0, 32)
+//                    storeBytes("Comment".toByteArray())
                 }
             )
             sendMode = 1 // pay separate

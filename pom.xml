@@ -20,9 +20,9 @@
   </repositories>
   <dependencies>
     <dependency>
-      <groupId>org.jetbrains.kotlin</groupId>
-      <artifactId>kotlin-test-junit5</artifactId>
-      <version>1.9.21</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.10.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -62,9 +62,30 @@
       <artifactId>curve25519-kotlin-jvm</artifactId>
       <version>0.0.4</version>
     </dependency>
+    <!--        <dependency>-->
+    <!--            <groupId>org.ton</groupId>-->
+    <!--            <artifactId>ton-kotlin-liteclient-jvm</artifactId>-->
+    <!--            <version>0.2.18</version>-->
+    <!--            <scope>test</scope>-->
+    <!--        </dependency>-->
   </dependencies>
   <build>
+    <sourceDirectory>src/main/kotlin</sourceDirectory>
+    <testSourceDirectory>src/tests/kotlin</testSourceDirectory>
     <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.3</version>
+        <!--                <configuration>-->
+        <!--                    <includes>-->
+        <!--                        <include>test.kt</include>-->
+        <!--                    </includes>-->
+        <!--                </configuration>-->
+      </plugin>
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>2.22.2</version>
+      </plugin>
       <plugin>
         <groupId>org.jetbrains.kotlin</groupId>
         <artifactId>kotlin-maven-plugin</artifactId>
@@ -85,14 +106,6 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.2</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <version>2.22.2</version>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>

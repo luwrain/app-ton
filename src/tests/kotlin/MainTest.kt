@@ -123,7 +123,7 @@ class MainTest {
             for example: seqno = 13 --- wallet.transfer --- seqno = 14 --- wallet.transfer --- seqno = 15 ......
          */
         wallet.transfer(pk, WalletTransfer {
-            destination = AddrStd("kQCFQbtdp14pw7XKfKw67MtXXr4ZRssxqILlkTXXodfNvPyg")
+            destination = AddrStd("kQCFQbtdp14pw7XKfKw67MtXXr4ZRssxqILlkTXXodfNvPyg") // sending from my wallet address to my wallet address
             coins = Coins(2000000000) // = 2 TON
             messageData = MessageData.raw(
                 body = buildCell {// empty body

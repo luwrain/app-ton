@@ -20,9 +20,6 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import kotlin.coroutines.CoroutineContext
-import org.ton.cell.Cell
-
-
 
 suspend fun main() {
     val json = Json { ignoreUnknownKeys = true }

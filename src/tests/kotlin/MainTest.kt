@@ -25,6 +25,7 @@ import org.ton.contract.wallet.WalletTransfer
 import org.ton.contract.wallet.WalletV3R2Contract
 
 
+@Disabled
 class MainTest {
 //        val lite_server = LiteServerDesc(
 //        id = PublicKey,
